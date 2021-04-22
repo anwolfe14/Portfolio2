@@ -1,0 +1,259 @@
+/*Add padding and margin to space out the page.
+Make the font larger too.*/
+body{
+	margin:1%;
+	padding:1%;
+	font-size:150%;
+	background-color: lightblue;
+}
+/*Make the h1 heading bigger with a bold font*/
+h1{
+	font-size: 2em; 
+	font-weight: bold;
+}
+
+/*Style the images*/
+img{
+    height: 200px;
+    width:auto;
+    border: 3px solid black;
+    padding: 25px;
+    border-radius: 10px;
+	margin: 10px;
+	max-height: 650px;
+	overflow: hidden;
+}
+
+/*Make the h2 heading match h1*/
+h2,h3,h4,h5{
+	font-size: 2em; 
+	font-weight: bold;
+}
+
+/*Improve the spacing for paragraphs AND headings*/
+p, h1, h2 {
+    padding: 10px;
+}
+
+/*Add borders around the main components and some
+space too*/
+header, nav, main, h1, footer{
+	margin: 10px 0;
+}
+nav ul{
+	display: flex;
+	flex-direction: column;
+}
+nav li{
+	background-color: white;
+	padding:10px;
+	width:80%;
+	border:1px solid black;
+	display: inline-block;
+}
+
+.current {
+	text-transform: uppercase;
+	color: rgb(0, 0, 0);
+	font-style: italic;
+}
+.gallery {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 1px 1px;
+	justify-content: center;
+	align-content: center;
+}
+.gallery_main{
+	display:grid;
+	grid-template-columns: 1fr;
+}
+.writing{
+	grid-column: 1 / span 2;
+}
+.gallery_main img{
+	grid-column: 2 / span 2;
+	width: 50%;
+	z-index: -1;
+}
+.row1{
+	grid-row: 1 / span 3;
+	grid-column: 1/ span 3;
+	color: white;
+	background-color: gray;
+	border: 10px solid black;
+   padding: 30px;
+   align-self: center;
+}
+.row2{
+	grid-row: 4 / span 3;
+	grid-column: 1/ span 3;
+	color: white;
+	background-color: gray;
+   border: 10px solid black;
+  padding: 30px;
+  align-self: center;
+}
+.row1,.row2,.row3{
+	margin: 20px;
+}
+.row3{
+	grid-row: 9 / span 3;
+	grid-column: 1/ span 3;
+	color: white;
+   background-color: gray;
+ border: 10px solid black;
+  padding: 30px;
+  align-self: center;
+}
+
+.skip a{
+	background: white;
+	top: 10px;
+	padding: 7px;
+	-webkit-transition: left 1s ease-out;
+	transition: left 1s ease-out;
+	z-index: 1;
+	position: absolute;
+	left:-500px;
+  }
+  .skip a:focus{
+	left: 10px;
+  }
+.imaging{
+	text-align: center;
+	margin-right: -50px;
+}
+.row{
+	color: white;
+	background-color: gray;
+	border: 10px solid black;
+	padding: 30px;
+	align-self: center;
+	margin-bottom: 20px;
+	grid-column: 1/ span 3;
+
+	margin-left: 30px;
+
+}
+#form {
+	display: grid;
+	width: 100%;
+	text-align: center;
+	align-self: center;
+	padding: 12px 12px 12px 12px;
+	border: 2px solid black;
+	background-color: #3CBC8D;
+	margin-top: 0;
+ }
+ #texting{
+	 color: darkblue;
+	 font-family: 'Courier', Courier, monospace;
+ }
+ .flip-card {
+	background-color: transparent;
+	width: 300px;
+	height: 300px;
+	perspective: 1000px;
+	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+  }
+  
+  .flip-card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: transform 0.6s;
+	transform-style: preserve-3d;  }
+  
+  .flip-card:hover .flip-card-inner,.flip-card-inner:focus{
+	transform: rotateY(180deg);
+  }
+  .flip-card-front, .flip-card-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+  }
+  .flip-card-back {
+	transform: rotateY(180deg);
+	display: block;
+  margin-left: auto;
+  margin-right: auto;
+  }
+ #logo{
+	/*Your code here.*/
+	animation-name: logo_grow;
+	animation-duration: 3s;
+	animation-iteration-count: 1;
+	-webkit-animation-duration: 3s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-name: logo_grow;
+ }
+ 
+ /*Keyframes for animation*/
+ @-webkit-keyframes logo_grow{
+   from{
+	 width: 250px; }
+   to{
+	 width: 1260px;}
+ }
+ 
+ @keyframes logo_grow{
+   from{
+	 width: 250px; }
+   to{
+	 width: 1260px;}
+ }
+ @media (prefers-reduced-motion) {
+	#logo {
+	  animation-name: none;
+	}
+	.flip-card-inner {
+        transition: none;
+    }
+
+  }
+@media screen and (min-width: 750px){
+.gallery {
+	display: grid;
+	grid-template-columns: 0.5fr 0.5fr 0.5fr;
+	grid-template-rows: 0.5fr 0.5fr 0.5fr;
+	justify-content: center;
+	align-content: center;
+
+}
+.imaging{
+	width:130%;
+}
+#form{
+	width: 100%;
+    margin-top: 0;
+}
+.gallery_main{
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+nav ul{
+	flex-direction: row;
+}
+.new_class,.new_class2 > img{
+	margin: 0 auto;
+}
+h1,h2,h3,h4,h5{
+	text-align: center;
+}
+#texting2{
+	width:75%;
+}
+#texting3{
+	width:75%;
+}
+#texting4{
+	width:75%;
+}
+}
+
+/*Added this so the links stay the same color*/
