@@ -1,0 +1,144 @@
+---
+title: "Thunder Assessment"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-09-14'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+install.packages("ggplot2",repos = "http://cran.us.r-project.org")
+library(ggplot2)
+install.packages("tidyverse",repos = "http://cran.us.r-project.org")
+library(tidyverse)
+plays = read_csv('shots_data.csv',show_col_types = FALSE)
+
+```
+Team A
+```{r cars}
+plays = read_csv('shots_data.csv',show_col_types = FALSE)
+head(plays)
+team_A = plays %>% filter(team == 'Team A')
+
+team_A_Corner3_made = team_A %>%
+              filter(y <=7.8,x >= 22,fgmade==1) %>% nrow()
+team_A_Corner3_attempted = team_A %>%
+              filter(y <=7.8,x >= 22) %>% nrow()
+
+team_A_Non_Corner3_made = team_A %>%
+              filter(y >7.8,x >= 23.75,fgmade==1) %>% nrow()
+
+team_A_Non_Corner3_attempted = team_A %>%
+              filter(y >7.8,x >= 23.75) %>% nrow() 
+
+team_A_Non_Corner2_made = team_A %>% filter(y > 7.8 & x < 23.75,fgmade==1) %>% 
+  nrow() 
+
+team_A_Non_Corner2_attempted = team_A %>% filter(y > 7.8 & x < 23.75) %>% nrow()
+
+team_A_Corner2_made =team_A %>% filter(y < 7.8 & x < 22,fgmade==1) %>% nrow() 
+
+team_A_Corner2_attempted =team_A %>% filter(y < 7.8 & x < 22) %>% nrow() 
+
+
+Team_A_Attemped_Shots = team_A_Corner3_attempted+ team_A_Non_Corner3_attempted + team_A_Non_Corner2_attempted + team_A_Corner2_attempted
+
+Team_A_Corner_3Percentage = (team_A_Corner3_attempted/Team_A_Attemped_Shots)*100
+
+Team_A_Non_Corner_3Percentage = (team_A_Non_Corner3_attempted/Team_A_Attemped_Shots)*100
+
+Team_A_Non_Corner_2Percentage = (team_A_Non_Corner2_attempted/Team_A_Attemped_Shots)*100
+
+Team_A_Corner_2Percentage = (team_A_Corner2_attempted/Team_A_Attemped_Shots)*100
+
+Two_point_total_A = Team_A_Corner_2Percentage+Team_A_Non_Corner_2Percentage
+
+print(paste0("Team A Corner 3 Shot Allocation: ", round(Team_A_Corner_3Percentage, 3),"%")) 
+print(paste0("Team A Non-Corner 3 Shot Allocation: ", round(Team_A_Non_Corner_3Percentage, 3),"%")) 
+
+print(paste0("Team A Two Point Shot Allocation: ", round(Two_point_total_A, 3),"%")) 
+```
+Team B
+```{r}
+team_B = plays %>% filter(team == 'Team B')
+
+team_B_Corner3_made = team_B %>%
+              filter(y <=7.8,x >= 22,fgmade==1) %>% nrow()
+team_B_Corner3_attempted = team_B %>%
+              filter(y <=7.8,x >= 22) %>% nrow()
+
+team_B_Non_Corner3_made = team_B %>%
+              filter(y >7.8,x >= 23.75,fgmade==1) %>% nrow()
+
+team_B_Non_Corner3_attempted = team_B %>%
+              filter(y >7.8,x >= 23.75) %>% nrow()
+
+team_B_Non_Corner2_made = team_B %>% filter(y > 7.8 & x < 23.75,fgmade==1) %>% 
+  nrow() 
+
+team_B_Non_Corner2_attempted = team_B %>% filter(y > 7.8 & x < 23.75) %>% nrow()
+
+team_B_Corner2_made =team_B %>% filter(y < 7.8 & x < 22,fgmade==1) %>% nrow() 
+
+team_B_Corner2_attempted =team_B %>% filter(y < 7.8 & x < 22) %>% nrow() 
+
+Team_B_Attemped_Shots = team_B_Corner3_attempted+ team_B_Non_Corner3_attempted + team_B_Non_Corner2_attempted + team_B_Corner2_attempted
+
+Team_B_Corner_3Percentage = (team_B_Corner3_attempted/Team_B_Attemped_Shots)*100
+
+Team_B_Non_Corner_3Percentage = (team_B_Non_Corner3_attempted/Team_B_Attemped_Shots)*100
+
+Team_B_Non_Corner_2Percentage = (team_B_Non_Corner2_attempted/Team_B_Attemped_Shots)*100
+
+Team_B_Corner_2Percentage = (team_B_Corner2_attempted/Team_B_Attemped_Shots)*100
+
+Two_point_total_B = Team_B_Corner_2Percentage+Team_B_Non_Corner_2Percentage
+
+
+print(paste0("Team B Corner 3 Shot Allocation: ", round(Team_B_Corner_3Percentage, 3),"%"))
+print(paste0("Team B Non-Corner 3 Shot Allocation: ", round(Team_B_Non_Corner_3Percentage, 3),"%"))
+print(paste0("Team B Two Point Shot Allocation: ", round(Two_point_total_B, 3),"%"))
+
+```
+
+EFG Non-Corner 3
+```{r}
+EFG_Non_Corner3_A = ((team_A_Non_Corner3_made + (0.5*team_A_Non_Corner3_made)) / team_A_Non_Corner3_attempted) * 100
+
+EFG_Non_Corner3_B = ((team_B_Non_Corner3_made + (0.5*team_B_Non_Corner3_made)) / team_B_Non_Corner3_attempted) * 100
+
+print(paste0("EFG Team A Non-Corner 3: ", round(EFG_Non_Corner3_A, 3),"%"))
+print(paste0("EFG Team B Non-Corner 3: ", round(EFG_Non_Corner3_B, 3),"%"))
+
+```
+EFG Corner 3
+```{r}
+EFG_Corner3_A = ((team_A_Corner3_made + (0.5*team_A_Corner3_made)) / team_A_Corner3_attempted) * 100
+
+EFG_Corner3_B = ((team_B_Corner3_made + (0.5*team_B_Corner3_made)) / team_B_Corner3_attempted) * 100
+
+print(paste0("EFG Team A Corner 3: ", round(EFG_Corner3_A, 3),"%"))
+print(paste0("EFG Team B Corner 3: ", round(EFG_Corner3_B, 3),"%"))
+
+
+```
+EFG Two Point Shot
+```{r}
+Team_A_Two_Point_made_shots = team_A_Corner2_made+team_A_Corner2_made
+Team_A_Two_Point_attempted_shots = team_A_Corner2_attempted+team_A_Corner2_attempted
+
+EFG_Team_A_Two_Point = ((Team_A_Two_Point_made_shots + (0.5*0)) / Team_A_Two_Point_attempted_shots) * 100
+
+Team_B_Two_Point_made_shots = team_B_Corner2_made+team_B_Corner2_made
+Team_B_Two_Point_attempted_shots = team_B_Corner2_attempted+team_B_Corner2_attempted
+
+EFG_Team_B_Two_Point = ((Team_B_Two_Point_made_shots + (0.5*0)) / Team_B_Two_Point_attempted_shots) * 100
+
+print(paste0("EFG of Team A Two Point Shot: ", round(EFG_Team_A_Two_Point, 3),"%"))
+print(paste0("EFG of Team B Two Point Shot: ", round(EFG_Team_B_Two_Point, 3),"%"))
+
+
+```
+
+
